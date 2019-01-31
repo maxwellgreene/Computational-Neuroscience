@@ -1,0 +1,86 @@
+---
+title: "Computational Neuroscience, Chapter #2"
+output: html_notebook
+---
+
+#2.1 - Introduction
+
+**Passive Channel** - Conductance *not* dependent on membrane potential. Thus, passive channels are can be thought of as "leak" channels.  
+
+**Active Channel** - Conductance relies on membrane potential, thus *voltage-gated*. e.g. sodium and potassium channels.  
+
+**Ligand-Gated Channel** - Requires binding ligand, generally neurotransmitter.  
+
+
+#2.2 - The Nernst Potential
+
+The ion concentration gradients, and therefore charge gradients, cause associated "Fickian" and "Ohmic" fluxes across/through the membrane. 
+
+##Fick's Law - 
+$$J_{Fick}(r) = -D \frac{dc}{dr}(r)$$
+
+Variable      |  Description
+--------      |  --------------------------------------------------
+$F_{Fick}(r)$ | Diffusion flux, mole/(area time)  i.e. the amount of substance flowing through a unit area during a unit time  
+$c(r)$        | Concentration as a function of radius from center of cell
+$D$           | **Diffusivity**, correlates *gradient* with *molar flux*. A property specific to te membrane. 
+
+###Diffusivity
+$$D = \mu kT$$
+
+Variable      |  Description
+--------      |  --------------------------------------------------
+$T$           | Temperature
+$k$           | Boltzmann's constant $(1.38064852 × 10-23 \frac{m^{2} kg }{s^{-2} K^{-1}})$
+$\mu$         | "Mobility" constant
+
+**Mobility** is defined as the amount of velocity obtained by a particle given a certain amount of applied force, ion specific.
+
+**$\therefore$ Fick's law relates the "mobility" to the membrane fluc of a specific ion.**
+
+##Ohm's Law - 
+$$J_{Ohm}(r) = -\mu (zec)\frac{d \phi}{dr}$$
+
+Variable      |  Description
+--------      |  --------------------------------------------------
+$z$           | Ion valence (e.g. -1 for Cl)
+$e$           | Elementary charge $(1.60217662 × 10^{-19} C)$
+$c(r)$        | Concentration as a function of radius from center of cell
+
+Interestingly, the $zec$ term measures "charge density" of the specific ion. This accounts for amount of charge, number of valence electrons, and physical density of ions. 
+
+So, Fick's law accounts for the **mobility / diffusivity** of the ions and Ohm's law accounts for the **charge density** of the ions.
+
+## Nernst-Plank equation - 
+
+$$J(r) = \underbrace{- \mu kT \frac{dc}{dr}}_{Fick's Law} + \underbrace{- \mu zec(r)\frac{d \phi}{dr}}_{Ohm's Law}$$
+Now the goal is to abtain an equation for equilibrium, which is the state at which all membrane ion flux is 0.
+
+$$
+J(r)=0 \hspace{10mm} \rightarrow \hspace{10mm}
+-\mu kT\frac{d}{dr}(log(c(r))=\mu ze\frac{d\phi}{dr}(r)
+$$
+
+Then we integrate each side in order to obtain voltage, a useful expression because of its ease of measurement.
+$$
+ze \int_{r=a-\delta}^{r=a}\frac{d\phi}{dr}dr = -kT
+\int_{r=a-\delta}^{r=a}\frac{d}{dr}logc(r)dr 
+$$
+
+After some simplification, we obtain the following equation:
+$$
+\boxed{V=\frac{kT}{ze}log{\frac{c_{in}}{c_{out}}}} 
+$$
+
+#2.3 - Membrane Conductance
+Our calculation of ion-specific membrance equilibrium potential was striclty at equilibrium. As soon as the true $V$ differs from our calculated equilibrium, a current will begin to flow because this equilibrium has been upset. Therefore, we must consider membrane conductance once $V$ differs from $V_{cl}$ we calculated in the previous section.
+
+
+#2.4 - Membrane Conductance & Current Balance
+
+#2.5 - Synaptic Conductance
+
+
+
+
+
