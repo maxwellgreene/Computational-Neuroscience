@@ -73,12 +73,23 @@ $$
 $$
 
 #2.3 - Membrane Conductance
-Our calculation of ion-specific membrance equilibrium potential was striclty at equilibrium. As soon as the true $V$ differs from our calculated equilibrium, a current will begin to flow because this equilibrium has been upset. Therefore, we must consider membrane conductance once $V$ differs from $V_{cl}$ we calculated in the previous section.
+Our calculation of ion-specific membrance equilibrium potential was striclty at equilibrium. As soon as the true $V$ differs from our calculated equilibrium, a current will begin to flow because this equilibrium has been upset. Therefore, we must consider membrane conductance once $V$ differs from $V_{cl}$ we calculated in the previous section.  
+**Resistivity** - A membrane-specific property describing the amount of resistance of the membrane per unit area.
 
 
-#2.4 - Membrane Conductance & Current Balance
+#2.4 - Membrane Capacitance & Current Balance
+
+
 
 #2.5 - Synaptic Conductance
+
+
+
+
+
+
+
+
 
 
 
