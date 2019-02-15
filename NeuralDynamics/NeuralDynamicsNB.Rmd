@@ -1,0 +1,99 @@
+---
+title: "Modelling Neural Dynamics"
+output: pdf_document
+---
+
+In this notebook I will explroe the functions from the NeuralDynamics functions given by Dr. Graham. 
+
+```{r,echo=F,message=F,warning=F}
+library(tidyverse)
+library(dplyr)
+```
+
+#Classical Hodgkin Huxley ODE's
+In their [famous paper](https://drive.google.com/file/d/1D1NflIrvcqbLqUJywic7dOnLyIQoqut_/view?usp=sharing) published in 1952, Hodgkin and Huxley used the space clamp method in squid axons to determine the dynamics of capacitance across the membrane.  
+
+To develop their model, they began with the observation that 
+
+$$
+Cv=Q
+$$   
+
+With variables $C$ - Capacitance, $v$ - Voltage, $Q$ - Charge across membrane.
+
+They then **differentiated** this equation, giving
+
+$$
+C\frac{dv}{dt}=I_{total}=\frac{dQ}{dt}
+\hspace{30mm}
+C\frac{dv}{dt}=I_{Na}+I_{K}+I_{Leak}+I_{Exp}
+$$
+
+With variables $\frac{dv}{dt}$ as time rate of change of membrane voltage (mV/s),
+$I_{total}I_{Na},I_{K},I_{Leak}$ as total, sodium, potassium and leak currents and
+$I_{Exp}$ as experimentally induced current
+
+
+We assume these currents obey Ohm's Law, such that:
+
+$$
+I_{Na}=g_{Na}(v_{Na}-v)
+\hspace{20mm}
+I_{K}=g_{K}(v_{K}-v)
+\hspace{20mm}
+I_{Leak}=g_{Leak}(v_{Leak}-v)
+$$
+
+where $v_{Na}, v_{K}$ are the Nernst potentials of sodium and potassium and $(v_{Na,K}-v)$ represents the difference between the current state and the Nernst potential. Notice that $I$ changes sign when $v$ passes $v_{Na}, v_{K}$, giving them their name *reversal potentials*.   
+
+Hodgkin and Huxlet found the conductance to be modelled best by a probability function of voltage. Therefore, the conductance is a function of the maximum conductance if all channels were open and the probability that each channel is open:
+$$
+g_{Na}=\bar{g}_{Na}m^3h, 
+\hspace{20mm}
+g_{K}=\bar{g}_{K}n^4
+$$
+
+where $m$,$h$,$n$ are voltage-dependent probabilities between 0 and 1 and $\bar{g}_Na$,$\bar{g}_{K}$ and maximum conductances. Note that the exponents here were initially unknown by H&H, but were calculated experimentally.
+
+In order to define $m$,$h$,$n$ we will introduce the equations
+
+$$
+\frac{dm}{dt}=\frac{m_{\infty}(v)-m}{\tau_{m}(v)},
+\hspace{20mm}
+\frac{dh}{dt}=\frac{h_{\infty}(v)-h}{\tau_{h}(v)},
+\hspace{20mm}
+\frac{dn}{dt}=\frac{n_{\infty}(v)-n}{\tau_{n}(v)}.
+$$
+
+Where $m_{\infty}(v)$, $h_{\infty}(v)$, $n_{\infty}(v)$ represent the conductance of respective ion as time approaches infinity for a given voltage and $\tau_{m}(v)$, $\tau_{h}(v)$, $\tau_{n}(v)$ are time constants that can be thought of as coefficients scaling the rate of change for a given voltage.   
+*Note: These equations have solution
+$$
+\frac{dx}{dt}=\frac{x_{\infty}(v)-x}{\tau_{x}(v)}
+\hspace{10mm}
+x= m,h,n
+\hspace{10mm} \rightarrow \hspace{10mm} 
+x(t)=x_{0}e^{\frac{-t}{\tau_{\infty}}}+x_{\infty}(1-e^{\frac{-t}{\tau_{\infty}}})
+$$
+
+Notice in the solution format that the RHS is a weighted average of the terms $x_{0}$ and $x_{\infty}$, where $e^{\frac{-t}{\tau_{\infty}}}$ decreases exponentially with time. Therefore, we say that $x_{0}$ *converges* to $x_{\infty}$ exponentially with time.
+
+This system becomes increasingly complex as voltage changes, because the time constant and $x_{\infty}$ are voltage dependent. 
+
+
+
+
+```{r,warning=F,include=F}
+source("gatingVariables.R")
+source("plotGatings.R")
+```
+
+```{r,echo=F}
+p1
+```
+
+```{r,echo=F}
+p2
+```
+
+
+
